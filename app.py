@@ -15,6 +15,10 @@ def clear_screen():
 
 def show_banner():
     clear_screen()
+    # تصميم اسم كوردستان بأحرف كبيرة ومجسمة (ASCII Art)
+    print(f"{GREEN} _  _ _  _ ____ ___  _ ____ ___ ____ _  _ {RESET}")
+    print(f"{GREEN} |_/  |  | |__/ |  \ | [__   |  |__| |\ | {RESET}")
+    print(f"{YELLOW} | \_ |__| |  \ |__/ | ___]  |  |  | | \| {RESET}")
     print(f"{CYAN}==============================================={RESET}")
     print(f"{RED}          NetStop Tool (MDK4 Edition)          {RESET}")
     print(f"{CYAN}==============================================={RESET}")
