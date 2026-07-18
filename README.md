@@ -1,15 +1,16 @@
-# 📡 Web-Based Device Isolation Tool (NetStop)
+# 📡 NetStop - MDK4 Wireless Isolation Tool
 
-أداة احترافية مبنية بلغة Node.js وواجهة رسومية (Web GUI) لعزل الأجهزة والتحكم في اتصال الشبكة المحلية عن طريق بروتوكول ARP Spoofing، مصممة خصيصاً للعمل على بيئة Kali Linux.
+ئامرازی کۆنتڕۆڵ و بڕینی گشتی تۆڕ لە ڕێگەی هەواوە بە زمانی کوردی (سۆرانی) بۆ سیستەمی Kali Linux.
 
-## ✨ الميزات
-- واجهة مستخدم رسومية (GUI) أنيقة وسهلة الاستخدام باللغة العربية.
-- عزل فوري لأي جهاز متصل بالشبكة المحلية بنقرة زر واحدة.
-- إمكانية إعادة الاتصال للجهاز المستهدف فوراً عند إيقاف الهجوم.
-- لوحة تحكم خلفية مرنة ومبنية على خادم Express.js.
+## 🛠️ چۆنیەتی دابەزاندن و ڕاکردن (How to Install & Run)
 
-## 🚀 متطلبات التشغيل
-تأكد من تثبيت الأدوات التالية على نظام Kali Linux الخاص بك:
 ```bash
-sudo apt update
-sudo apt install dsniff nodejs npm -y
+# 1. دابەزاندنی ئامرازەکە
+git clone [https://github.com/YOUR_USERNAME/networkstop.git](https://github.com/YOUR_USERNAME/networkstop.git)
+cd networkstop
+
+# 2. دابەزاندنی پێداویستییەکان
+sudo apt update && sudo apt install mdk4 -y
+
+# 3. کار پێکردنی ئامرازەکە
+sudo python3 app.py
