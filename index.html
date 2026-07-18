@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئامرازی بڕینی ئینتەرنێت</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #121212; 
+            color: #e0e0e0; 
+            text-align: center; 
+            padding: 60px 20px; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 550px; 
+            margin: 0 auto; 
+            background: #1e1e1e; 
+            padding: 40px 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6); 
+            border: 1px solid #333;
+        }
+        h2 { color: #ffffff; margin-bottom: 10px; font-weight: 600; }
+        p { color: #aaa; font-size: 14px; margin-bottom: 30px; }
+        .btn-group { display: flex; flex-direction: column; gap: 15px; }
+        button { 
+            padding: 15px 25px; 
+            font-size: 16px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        button:active { transform: scale(0.98); }
+        .btn-isolate { background-color: #cf2e2e; color: white; }
+        .btn-restore { background-color: #00adb5; color: white; }
+        .status { 
+            margin-top: 30px; 
+            font-size: 15px; 
+            color: #eed620; 
+            background: #282828;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ئامرازی کۆنتڕۆڵ و عەزلکردنی تۆڕ 📡</h2>
+    <p>بە تەنها یەک کلیک ئینتەرنێتی تەواوی ئامێرەکانی سەر تۆڕەکەت ببڕە</p>
+    
+    <div class="btn-group">
+        <button class="btn-isolate" onclick="handleIsolateAll()">بڕینی هێڵ لەسەر هەمووان 🚫</button>
+        <button class="btn-restore" onclick="handleRestoreAll()">هێنانەوەی هێڵ بۆ هەمووان 🔄</button>
+    </div>
+    
+    <div class="status" id="messageBox">ئامادەیە بۆ وەرگرتنی فەرمان...</div>
+</div>
+
+<script>
+    const API_BASE_URL = 'http://localhost:3001';
+
+    function setMessage(msg, isError = false) {
+        const box = document.getElementById('messageBox');
+        box.innerText = msg;
+        box.style.color = isError ? '#ff4a4a' : '#eed620';
+    }
+
+    async function handleIsolateAll() {
+        setMessage("...خەریکە هێڵ لەسەر تەواوی تۆڕەکە دەبڕدرێت");
+        try {
+            const response = await axios.post(`${API_BASE_URL}/api/network/isolate-all`);
+            if (response.data.success) { 
+                setMessage(` Karlێکرا: ${response.data.message}`); 
+            }
+        } catch (error) { 
+            setMessage(`خەتا لە پەیوەندی خاوەنکار: ${error.message}`, true); 
+        }
+    }
+
+    async function handleRestoreAll() {
+        setMessage("...خەریکە هێڵ بۆ ئامێرەکان دەگەڕێنرێتەوە");
+        try {
+            const response = await axios.post(`${API_BASE_URL}/api/network/restore-all`);
+            if (response.data.success) { 
+                setMessage(`✅ ${response.data.message}`); 
+            }
+        } catch (error) { 
+            setMessage(`❌ خەتا لە پەیوەندی خاوەنکار: ${error.message}`, true); 
+        }
+    }
+</script>
+
+</body>
+</html>
