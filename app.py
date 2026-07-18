@@ -15,13 +15,14 @@ def clear_screen():
 
 def show_banner():
     clear_screen()
-    print(f"{GREEN} _  _ _  _ ____ ___  _ ____ ___ ____ _  _ {RESET}")
-    print(f"{GREEN} |_/  |  | |__/ |  \ | [__   |  |__| |\ | {RESET}")
-    print(f"{YELLOW} | \_ |__| |  \ |__/ | ___]  |  |  | | \| {RESET}")
+    # إضافة حرف r قبل النصوص لحل مشكلة الـ SyntaxWarning تماماً
+    print(f"{GREEN}" + r" _  _ _  _ ____ ___  _ ____ ___ ____ _  _ " + f"{RESET}")
+    print(f"{GREEN}" + r" |_/  |  | |__/ |  \ | [__   |  |__| |\ | " + f"{RESET}")
+    print(f"{YELLOW}" + r" | \_ |__| |  \ |__/ | ___]  |  |  | | \| " + f"{RESET}")
     print(f"{CYAN}==============================================={RESET}")
     print(f"{RED}          NetStop Tool (MDK4 Edition)          {RESET}")
     print(f"{CYAN}==============================================={RESET}")
-    print(f"{YELLOW} ئامرازی کۆنتڕۆڵ و bڕینی گشتی تۆڕ لە ڕێگەی هەواوە{RESET}")
+    print(f"{YELLOW} ئامرازی کۆنتڕۆڵ و بڕینی گشتی تۆڕ لە ڕێگەی هەواوە{RESET}")
     print(f"{CYAN}==============================================={RESET}")
 
 def start_attack(interface, bssid):
